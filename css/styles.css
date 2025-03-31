@@ -315,6 +315,8 @@ button.delete:hover {
     background-size: cover;
     background-position: center;
     filter: brightness(0.8) saturate(0.8) blur(3px);
+    background-color: #000c;
+    background-image: url('../img/default-bg.jpg');
     opacity: 0.9;
     transition: all 0.5s ease-out;
 }

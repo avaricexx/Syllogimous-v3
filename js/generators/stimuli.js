@@ -4,7 +4,7 @@ function maxStimuliAllowed() {
     if (savedata.useNonsenseWords) {
         if (savedata.nonsenseWordLength % 2)
             quota = Math.min(quota, ((21 ** (Math.floor(savedata.nonsenseWordLength / 2) + 1)) * (5 ** Math.floor(savedata.nonsenseWordLength / 2))));
-        else 
+        else
             quota = Math.min(quota, (21 ** (savedata.nonsenseWordLength / 2)) * (5 ** (savedata.nonsenseWordLength / 2)));
     }
     if (savedata.useGarbageWords) {
@@ -13,20 +13,21 @@ function maxStimuliAllowed() {
     if (savedata.useMeaningfulWords) {
         if (savedata.meaningfulWordNouns) quota = Math.min(quota, meaningfulWords.nouns.length);
         if (savedata.meaningfulWordAdjectives) quota = Math.min(quota, meaningfulWords.adjectives.length);
-    }   
+    }
     if (savedata.useEmoji) quota = Math.min(quota, emoji.length);
     if (savedata.useJunkEmoji) quota = Math.min(quota, JUNK_EMOJI_COUNT);
     if (savedata.useVisualNoise) quota = Math.min(quota, 1000);
-    
+
     return quota - 1;
 }
 
 function createNonsenseWord() {
     const vowels = ['A', 'E', 'I', 'O', 'U'], consonants = ['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z'];
+    const bannedWords = ['DIC', 'DIK', 'COC', 'COK', 'FUC', 'FUK', 'FEC', 'FEK', 'NIG', 'PIS', 'TIT', 'SEX', 'GAY', 'FAG'];
     for (string = ''; string.length < savedata.nonsenseWordLength;) {
-        if ((string.length + 1) % 2) 
+        if ((string.length + 1) % 2)
             string += consonants[Math.floor(Math.random() * 21)];
-        else 
+        else
             string += vowels[Math.floor(Math.random() * 5)];
 
         if (string.length == savedata.nonsenseWordLength) {
@@ -76,7 +77,7 @@ function createVisualNoiseTag() {
 function createStimuli(numberOfStimuli, usedStimuli) {
     usedStimuli = usedStimuli ?? [];
     const quota = maxStimuliAllowed() - usedStimuli.length;
-    
+
     const uniqueWords = {
         meaningful: {
             nouns: new Set(),
@@ -95,7 +96,7 @@ function createStimuli(numberOfStimuli, usedStimuli) {
     });
 
     const stimulusTypes = new Set();
-    
+
     if (savedata.useNonsenseWords) stimulusTypes.add('nonsenseWords');
     if (savedata.useGarbageWords) stimulusTypes.add('garbageWords');
     if (savedata.useMeaningfulWords) stimulusTypes.add('meaningfulWords');
@@ -107,7 +108,7 @@ function createStimuli(numberOfStimuli, usedStimuli) {
     const stimuliCreated = [];
 
     const partsOfSpeech = new Set();
-    
+
     if (savedata.meaningfulWordNouns) partsOfSpeech.add('nouns');
     if (savedata.meaningfulWordAdjectives) partsOfSpeech.add('adjectives');
     if (!partsOfSpeech.size) partsOfSpeech.add('nouns');
@@ -131,7 +132,7 @@ function createStimuli(numberOfStimuli, usedStimuli) {
                 }
             }
 
-            if (uniqueWords.nonsense.size >= quota) stimulusTypes.delete(randomStimulusType);     
+            if (uniqueWords.nonsense.size >= quota) stimulusTypes.delete(randomStimulusType);
         } else if (randomStimulusType == 'garbageWords') {
             while (true) {
                 const string = createGarbageWord();
@@ -142,7 +143,7 @@ function createStimuli(numberOfStimuli, usedStimuli) {
                 }
             }
 
-            if (uniqueWords.garbage.size >= quota) stimulusTypes.delete(randomStimulusType);     
+            if (uniqueWords.garbage.size >= quota) stimulusTypes.delete(randomStimulusType);
         } else if (randomStimulusType == 'meaningfulWords') {
             const randomPartOfSpeech = Array.from(partsOfSpeech)[Math.floor(Math.random() * partsOfSpeech.size)]
 
@@ -151,10 +152,10 @@ function createStimuli(numberOfStimuli, usedStimuli) {
 
                 do {
                     if (uniqueWords.meaningful[randomPartOfSpeech].size >= meaningfulWords[randomPartOfSpeech].length) uniqueWords.meaningful[randomPartOfSpeech].nouns = new Set();
-    
-                    randomMeaningfulWord = meaningfulWords[randomPartOfSpeech][Math.floor(Math.random() * meaningfulWords[randomPartOfSpeech].length)];         
+
+                    randomMeaningfulWord = meaningfulWords[randomPartOfSpeech][Math.floor(Math.random() * meaningfulWords[randomPartOfSpeech].length)];
                 } while (uniqueWords.meaningful[randomPartOfSpeech].has(randomMeaningfulWord));
-    
+
                 stimuliCreated.push(randomMeaningfulWord);
                 uniqueWords.meaningful[randomPartOfSpeech].add(randomMeaningfulWord);
             } else stimulusTypes.delete(randomStimulusType);
@@ -164,12 +165,12 @@ function createStimuli(numberOfStimuli, usedStimuli) {
             let emojiWord;
 
             do {
-                emojiWord = emoji[Math.floor(Math.random() * emoji.length)];           
+                emojiWord = emoji[Math.floor(Math.random() * emoji.length)];
             } while (uniqueWords.emoji.has(emojiWord));
-            
+
             stimuliCreated.push(emojiWord);
             uniqueWords.emoji.add(emojiWord);
-            
+
             if (uniqueWords.emoji.size >= quota) stimulusTypes.delete(randomStimulusType);
         } else if (randomStimulusType == 'junkEmoji') {
             let junkId;
