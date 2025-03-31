@@ -210,7 +210,7 @@ button.delete:hover {
     border-left: none;
     border-right: none;
     background-image: url(../img/nnnoise.svg);
-    opacity: 0.9;
+    opacity: 1;
     position: fixed;
     height: 100vh;
     width: 100vw;
@@ -314,10 +314,9 @@ button.delete:hover {
     height: 100%;
     background-size: cover;
     background-position: center;
-    filter: brightness(0.8) saturate(0.8) blur(3px);
+    filter: brightness(0.8) blur(4px);
     background-color: #000c;
     background-image: url('../img/default-bg.jpg');
-    opacity: 0.9;
     transition: all 0.5s ease-out;
 }
 
