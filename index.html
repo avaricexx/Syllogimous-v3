@@ -880,7 +880,8 @@
 					</div>
 				</div>
 				<div class="offcanvas-side">
-					<label class="offcanvas-close" for="offcanvas-settings">✕</label>
+					<button onclick="toggleFullscreen()" class="fullscreen-button" title="Toggle Fullscreen"><img src="img/fullscreen.svg" alt="Fullscreen" width="20" height="20"></button>
+					<label class="offcanvas-close" for="offcanvas-settings"><img src="img/close.svg" alt="Close" width="20" height="20"></label>
 				</div>
 			</div>
 			<input id="offcanvas-history"
@@ -888,7 +889,7 @@
 				   hidden>
 			<div class="offcanvas offcanvas--right">
 				<div class="offcanvas-side">
-					<label class="offcanvas-close" for="offcanvas-history">✕</label>
+					<label class="offcanvas-close" for="offcanvas-history"><img src="img/close.svg" alt="Close" width="20" height="20"></label>
 				</div>
 				<div class="offcanvas-body ffmono hql-frame">
 					<div class="hql-stats">
@@ -918,7 +919,7 @@
 				   hidden>
 			<div class="offcanvas offcanvas--left">
 				<div class="offcanvas-side">
-					<label class="offcanvas-close" for="offcanvas-credits">✕</label>
+					<label class="offcanvas-close" for="offcanvas-credits"><img src="img/close.svg" alt="Close" width="20" height="20"></label>
 				</div>
 				<div class="offcanvas-body ffmono">
 					<div style="direction: ltr;">
@@ -1119,14 +1120,14 @@
 			<div id="graph-popup-score" class="graph-popup-content"><canvas id="graph-canvas-score"></canvas></div>
 			<div class="graph-end-controls">
 				<div>* Only timed questions are displayed</div>
-				<button id="graph-close-popup" class="graph-close-popup">Close</button>
+				<button id="graph-close-popup" class="graph-close-popup"><img src="img/close.svg" alt="Close" width="20" height="20"></button>
 			</div>
 		</div>
 
 		<div id="error-popup" class="error-popup">
 			<div class="error-popup-content">
 				<p id="error-message"></p>
-				<button id="error-close-popup" class="error-close-popup">Close</button>
+				<button id="error-close-popup" class="error-close-popup"><img src="img/close.svg" alt="Close" width="20" height="20"></button>
 				<textarea id="error-stack" readonly></textarea>
 			</div>
 		</div>

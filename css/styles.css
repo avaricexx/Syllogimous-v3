@@ -155,7 +155,7 @@ button:disabled {
     background-color: #2b3a37;
 }
 
-button:not(:disabled):hover {
+button:not(:disabled):not(.fullscreen-button):hover {
     box-shadow: 0 2px 4px #4aa39a;
 }
 
@@ -1061,6 +1061,28 @@ label.open[for="offcanvas-credits"]:hover {
     top: 0;
 }
 
+.fullscreen-button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0.55rem;
+    position: absolute;
+    top: 0;
+    right: 2rem;
+}
+
+.fullscreen-button img {
+    width: 15px;
+    height: 15px;
+    filter: invert(100%);
+}
+
+.offcanvas-close img {
+    width: 20px;
+    height: 20px;
+    filter: invert(100%);
+}
+
 .offcanvas--left .offcanvas-close {
     right: 0;
 }
@@ -1893,6 +1915,16 @@ table.distinction {
     color: white;
     border: none;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 15px;
+}
+
+#error-close-popup img, #graph-close-popup img {
+    width: 16px;
+    height: 16px;
+    filter: brightness(5);
 }
 
 #error-close-popup:hover, #graph-close-popup:hover {
