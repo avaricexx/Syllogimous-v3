@@ -5,10 +5,6 @@ A modified version of **Syllogimous-v3**, designed to support new theories and e
 ## 🚀 Live Demo
 [Try it here](https://avaricexx.github.io/Syllogimous-Reimagined/)
 
-## 🛠️ Features
-- Supports new theories in relational reasoning.
-- Interactive experiments for enhanced learning.
-
 ## 👥 Contributors
 - [avarice](https://github.com/avaricexx/)
 - [4skinSkywalker](https://github.com/4skinSkywalker/)
