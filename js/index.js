@@ -1034,29 +1034,37 @@ function handleKeyPress(event) {
 }
 
 function toggleFullscreen() {
+    const element = document.documentElement;
+
     if (!document.fullscreenElement &&
         !document.mozFullScreenElement && // Firefox
         !document.webkitFullscreenElement && // Chrome, Safari and Opera
-        !document.msFullscreenElement) {  // IE/Edge
+        !document.msFullscreenElement) {  // Edge
 
-        if (document.documentElement.requestFullscreen) {
-            document.documentElement.requestFullscreen();
-        } else if (document.documentElement.mozRequestFullScreen) { // Firefox
-            document.documentElement.mozRequestFullScreen();
-        } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
-            document.documentElement.webkitRequestFullscreen();
-        } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
-            document.documentElement.msRequestFullscreen();
+        const requestMethod = element.requestFullscreen ||
+                             element.mozRequestFullScreen || // Firefox
+                             element.webkitRequestFullscreen || // Chrome, Safari, and Opera
+                             element.msRequestFullscreen; // Edge
+
+        // For mobile Safari and other iOS browsers
+        if (requestMethod) {
+            // Call the method on the element instead of the document
+            requestMethod.call(element)
+                .catch(err => {
+                    console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                });
         }
     } else {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.mozCancelFullScreen) { // Firefox
-            document.mozCancelFullScreen();
-        } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
-            document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) { // IE/Edge
-            document.msExitFullscreen();
+        const exitMethod = document.exitFullscreen ||
+                          document.mozCancelFullScreen || // Firefox
+                          document.webkitExitFullscreen || // Chrome, Safari, and Opera
+                          document.msExitFullscreen; // Edge
+
+        if (exitMethod) {
+            exitMethod.call(document)
+                .catch(err => {
+                    console.log(`Error attempting to exit fullscreen: ${err.message}`);
+                });
         }
     }
 }
